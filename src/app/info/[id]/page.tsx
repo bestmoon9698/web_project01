@@ -36,9 +36,12 @@ export default async function InfoDetailPage({ params }: { params: Promise<{ id:
       </div>
 
       <header className="sticky top-0 z-20 bg-white/60 backdrop-blur-xl border-b border-white/40">
-        <div className="max-w-4xl mx-auto px-6 py-5">
+        <div className="max-w-4xl mx-auto px-6 py-5 flex justify-between items-center">
           <Link href="/" className="inline-flex items-center gap-2 text-slate-500 font-bold hover:text-slate-800 transition-colors">
             <span>←</span> 목록으로 돌아가기
+          </Link>
+          <Link href="/blog" className="text-sm font-black text-slate-600 hover:text-blue-600 transition-colors">
+            블로그
           </Link>
         </div>
       </header>

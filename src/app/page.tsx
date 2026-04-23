@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import localInfo from "../../public/data/local-info.json";
 
 export default function Home() {
@@ -33,9 +34,14 @@ export default function Home() {
               우리 동네 생활 정보
             </h1>
           </div>
-          <div className="hidden sm:flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-            <span className="text-sm font-bold text-slate-600">오늘의 소식 LIVE</span>
+          <div className="flex items-center gap-6">
+            <Link href="/blog" className="text-sm font-black text-slate-600 hover:text-blue-600 transition-colors">
+              블로그
+            </Link>
+            <div className="hidden sm:flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+              <span className="text-sm font-bold text-slate-600">오늘의 소식 LIVE</span>
+            </div>
           </div>
         </div>
       </header>
