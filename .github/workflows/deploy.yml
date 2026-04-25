@@ -1,9 +1,15 @@
-name: Deploy to Cloudflare Pages
+name: Automated Content & Deploy
 
 on:
   push:
     branches:
       - main
+  schedule:
+    - cron: '0 22 * * *' # 매일 한국시간 오전 7시 (UTC 22:00)
+  workflow_dispatch: # 수동 실행 기능
+
+permissions:
+  contents: write
 
 jobs:
   deploy:
@@ -11,6 +17,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -20,6 +28,23 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Run automation scripts (Only on schedule/dispatch)
+        if: github.event_name != 'push'
+        env:
+          PUBLIC_DATA_API_KEY: ${{ secrets.PUBLIC_DATA_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          node scripts/fetch-public-data.js
+          node scripts/generate-blog-post.js
+
+      - name: Commit and push changes (Only on schedule/dispatch)
+        if: github.event_name != 'push'
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add .
+          git diff --quiet && git diff --staged --quiet || (git commit -m "자동 업데이트: 공공데이터 수집 및 블로그 글 생성" && git push)
 
       - name: Build project
         run: npm run build
