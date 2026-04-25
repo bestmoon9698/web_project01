@@ -35,8 +35,11 @@ export default function Home() {
             </h1>
           </div>
           <div className="flex items-center gap-6">
-            <Link href="/blog" className="text-sm font-black text-slate-600 hover:text-blue-600 transition-colors">
-              블로그
+            <Link
+              href="/blog"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border-2 border-violet-400 text-violet-700 font-black text-base hover:bg-violet-50 hover:border-violet-500 transition-all shadow-sm hover:shadow-md"
+            >
+              📖 블로그
             </Link>
             <div className="hidden sm:flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
@@ -95,9 +98,11 @@ export default function Home() {
                         {event.startDate}
                       </div>
                     </div>
-                    <h4 className="text-2xl font-black mb-4 leading-tight group-hover:text-slate-700 transition-colors">
-                      {event.name}
-                    </h4>
+                    <Link href={`/info/${event.id}`}>
+                      <h4 className="text-2xl font-black mb-4 leading-tight group-hover:text-blue-600 transition-colors">
+                        {event.name}
+                      </h4>
+                    </Link>
                     <p className="text-slate-500 text-sm mb-8 leading-relaxed font-medium">
                       {event.summary}
                     </p>
@@ -111,12 +116,12 @@ export default function Home() {
                         {event.target}
                       </div>
                     </div>
-                    <a
+                    <Link
                       href={`/info/${event.id}`}
                       className={`block w-full text-center py-4 rounded-2xl text-sm font-black text-white shadow-lg bg-gradient-to-r ${gradients[index % gradients.length]} hover:brightness-110 transition-all active:scale-[0.98]`}
                     >
                       자세히 보기
-                    </a>
+                    </Link>
                   </div>
                 </div>
               );
@@ -157,9 +162,11 @@ export default function Home() {
                     </span>
                   </div>
 
-                  <h4 className="text-3xl font-black mb-4 leading-tight">
-                    {benefit.name}
-                  </h4>
+                  <Link href="/blog">
+                    <h4 className="text-3xl font-black mb-4 leading-tight group-hover:text-indigo-600 transition-colors">
+                      {benefit.name}
+                    </h4>
+                  </Link>
                   <p className="text-slate-500 text-lg font-medium mb-10 leading-relaxed">
                     {benefit.summary}
                   </p>
@@ -175,12 +182,12 @@ export default function Home() {
                     </div>
                   </div>
 
-                  <a
-                    href={`/info/${benefit.id}`}
+                  <Link
+                    href="/blog"
                     className={`inline-flex items-center gap-3 text-transparent bg-clip-text bg-gradient-to-r ${rainbowGradients[index % rainbowGradients.length]} font-black text-lg group-hover:gap-5 transition-all`}
                   >
                     지금 혜택 확인하기 <span>→</span>
-                  </a>
+                  </Link>
                 </div>
               );
             })}
