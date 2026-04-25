@@ -162,7 +162,7 @@ export default function Home() {
                     </span>
                   </div>
 
-                  <Link href="/blog">
+                  <Link href={`/info/${benefit.id}`}>
                     <h4 className="text-3xl font-black mb-4 leading-tight group-hover:text-indigo-600 transition-colors">
                       {benefit.name}
                     </h4>
@@ -183,7 +183,7 @@ export default function Home() {
                   </div>
 
                   <Link
-                    href="/blog"
+                    href={`/info/${benefit.id}`}
                     className={`inline-flex items-center gap-3 text-transparent bg-clip-text bg-gradient-to-r ${rainbowGradients[index % rainbowGradients.length]} font-black text-lg group-hover:gap-5 transition-all`}
                   >
                     지금 혜택 확인하기 <span>→</span>
